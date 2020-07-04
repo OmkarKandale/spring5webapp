@@ -2,23 +2,33 @@ package com.neo.spring5webapp.bootstrap;
 
 import com.neo.spring5webapp.domain.Author;
 import com.neo.spring5webapp.domain.Book;
+import com.neo.spring5webapp.domain.Publisher;
 import com.neo.spring5webapp.repositories.AuthorRepository;
 import com.neo.spring5webapp.repositories.BookRepository;
+import com.neo.spring5webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
     private final AuthorRepository authorRepository;
-    private  final BookRepository bookRepository;
+    private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
+
     }
 
     @Override
     public void run(String... args) throws Exception {
+        Publisher publisher = new Publisher();
+        publisher.setName("SFG publishing");
+        publisher.setCity("St Petersburg");
+        publisher.setState("FL");
+
         Author eric = new Author("Eric", "Evans");
         Book ddd = new Book("Domain Driven Design", "123123");
         eric.getBooks().add(ddd);
